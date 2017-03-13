@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Point on a map D3</title>
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="dist/js/viewport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+
+
+<style type="text/css">
+@import url(//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css);
+svg {
+  position: relative;
+}
+#map {
+  width: 960px;
+  height: 500px;
+  position: relative;;
+}
+path {
+  fill: #000;
+  fill-opacity: .2;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+</style>
+</head>
+<body>
+    <h1></h1>
+    <div id='map' ></div>
+
+<script type="text/javascript">   
+
+var map = new L.Map("map", {center: [45.52, -73.6], zoom: 12})
+    .addLayer(new L.TileLayer('http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png')
+    //.addLayer(new L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}')
+    );
+map._initPathRoot() 
+  var svg = d3.select("#map").select("svg"),
+  g = svg.append("g");
+
+d3.json("business_for_hw5.json", function(error, collection) {
+//d3.json("state.json", function(error, collection) {
+  if (error) throw error;
+
+    console.log(collection);
+    collection.forEach(function(d) {
+      d.LatLng = new L.LatLng(d.latitude,
+                  d.longitude)
+    })
+    var feature = g.selectAll("circle")
+      .data(collection)
+      .enter().append("circle")
+      //.style("stroke", "black")  
+      .style("opacity", .6) 
+      .style("fill", "red")
+      .attr("r", 5);
+
+
+  feature.on("mouseover", function(d) {
+      d3.select(this).style("stroke", "black")
+    })
+
+  map.on("viewreset", reset);
+  reset();
+
+  // Reposition the SVG to cover the features.
+  function reset() {
+      feature.attr("transform", 
+      function(d) { 
+        return "translate("+ 
+          map.latLngToLayerPoint(d.LatLng).x +","+ 
+          map.latLngToLayerPoint(d.LatLng).y +")";
+        }
+      )
+  }
+
+});
+
+</script>
+</body>
+</html>

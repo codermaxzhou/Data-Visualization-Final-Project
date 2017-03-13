@@ -1,0 +1,100 @@
+[{
+    "checkin_info": {
+        "9-1": 1,
+        "15-3": 1,
+        "15-4": 1,
+        "16-3": 1,
+        "21-5": 1,
+        "14-3": 1
+    },
+    "city": "Montr\u00e9al",
+    "review_count": 10,
+    "name": "H\u00c0O",
+    "neighborhoods": [
+        "Plateau-Mont-Royal"
+    ],
+    "open": true,
+    "business_id": "JzHSoCn-KWJxRLNxy8SQfg",
+    "full_address": "255 Rue Rachel Est\nPlateau-Mont-Royal\nMontr\u00e9al, QC H2W 1E5",
+    "hours": {
+        "Tuesday": {
+            "close": "16:00",
+            "open": "12:00"
+        },
+        "Friday": {
+            "close": "21:00",
+            "open": "17:00"
+        },
+        "Wednesday": {
+            "close": "16:00",
+            "open": "12:00"
+        },
+        "Thursday": {
+            "close": "21:00",
+            "open": "17:00"
+        },
+        "Saturday": {
+            "close": "21:00",
+            "open": "12:00"
+        }
+    },
+    "reviews": {
+        "5": [
+            "Simple yet delicious. I order the meat bao. The shredded roast pork was very succulent. Mixed with crispy garlic and fresh scallions, it was a perfect combination of flavor and texture. The bao is like a Chinese mantou sliced in half like a burger bun. If I could change anything, maybe I would make it slightly thinner or use the baos that comes with Peking duck. This would increase the ratio of the filling to bun. Overall, great bao. Unique, simple, and artsy. Highly recommended.",
+            "Some of the most delicious buns I have ever had in my life. Beautiful and minimal space with super friendly staff as well. Can't wait to return.",
+            "This was one of the highlights of my trip to Montreal. I came all the way from NYC to have Hao. I followed the chef on social media for quite some time, and was really looking forward to having his bao. It didn't let me down. In fact, it exceeded my expectations. From the interior, to the loveliest service, to downright delicious food - I will come back for sure. \n\nThe interior is a minimally designed small space, after its namesake Hao (meaning white). The clean modern space doesn't mess around with non-essential decorations. The attention to detail is immaculate. Loved being the space. It makes you feel like you've stumbled upon a gem in the city. \n\nThe service was very friendly. The cashier was very kind to all the guests and was very engaging in conversation. She took care of my friends and was endearing. An excellent person to greet everyone as they come in. She indulged my obsession with the food as well. \n\nI ordered the Buns Vapeur ( Steamed Buns ). They use organic pork shoulder from a local place called Boucherie Champfleuri. The pork is perfectly braised in soy sauce and is topped with the perfect balance of texture with fried onions and shallots. The bao (bread) was steamed to perfection. It has the right amount of air, and the perfect amount of chew...sticks to your teeth just right. They have a vegetarian option as well. I also had their salad which was fresh, crunchy, and has a light touch of heat...a nice balance to the crisp freshness of the dish. \n\nFor me, it is a perfect place to stop by for a quick bite, or grab a few for friends at a dinner party in Montreal to really impress. \n\nMake sure to go and follow them on social media for inspiring images.",
+            "Super-delicious buns! My husband picked up some of the vegetarian ones and brought them home for a snack. Perfect white steamed buns with some kind of faux pulled pork, crispy onions, cilantro and mayo, seasoned with a magical combination of spices that make every bite surprisingly divine. It's $9.50 for two little buns- they won't fill you up- but I honestly think they're worth it. Next time I'll just get four.",
+            "Awesome! Yummy buns but best of all - absolutely amazing service! Super-friendly (not the plastic smile kind of friendly, but the truly nice one) and fast. Will definitely come back!"
+        ],
+        "4": [
+            "Nice clean simple design. Cashier was super friendly. Minimal menu which includes 4 items. I tried the pork buns, they were pretty delicious but found them too expensive for what they are. 10.50$ for 2 tiny buns is a little too much. I ate 2 and was still hungry afterwards..."
+        ]
+    },
+    "state": "QC",
+    "rating_count": {
+        "5": 5,
+        "4": 1
+    },
+    "longitude": -73.579555999999997,
+    "stars": 4.5,
+    "latitude": 45.520516000000001,
+    "attributes": {
+        "Take-out": true,
+        "Good For": {
+            "dessert": false,
+            "latenight": false,
+            "lunch": false,
+            "dinner": false,
+            "breakfast": false,
+            "brunch": false
+        },
+        "Noise Level": "quiet",
+        "Takes Reservations": false,
+        "Delivery": false,
+        "Has TV": false,
+        "Outdoor Seating": true,
+        "Attire": "casual",
+        "Ambience": {
+            "romantic": false,
+            "intimate": false,
+            "classy": false,
+            "hipster": false,
+            "divey": false,
+            "touristy": false,
+            "trendy": false,
+            "upscale": false,
+            "casual": false
+        },
+        "Waiter Service": true,
+        "Good for Kids": true,
+        "Good For Groups": false,
+        "Price Range": 2
+    },
+    "type": "business",
+    "categories": [
+        "Asian Fusion",
+        "Filipino",
+        "Restaurants"
+    ]
+}
+]

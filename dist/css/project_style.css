@@ -1,0 +1,207 @@
+a:link    {color:green; background-color:transparent; text-decoration:none}
+a:visited {color: #ff506b; background-color:transparent; text-decoration:none}
+a:hover   {color:red; background-color:transparent; text-decoration:underline}
+a:active  {color:yellow; background-color:transparent; text-decoration:underline}
+
+.node {
+  box-sizing: border-box;
+  line-height: 1em;
+  overflow: hidden;
+  position: absolute;
+  white-space: pre;
+  background: #ddd;
+}
+
+.node-label,
+.node-value {
+  margin: 4px;
+}
+
+.node-value {
+  margin-top: -2px;
+}
+
+.node-value {
+  font-weight: bold;
+}
+
+.ticks {
+  font: 10px sans-serif;
+}
+
+
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: #000;
+  stroke-opacity: 0.3;
+  stroke-width: 10px;
+}
+
+.track-inset {
+  stroke: #ddd;
+  stroke-width: 8px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 50px;
+  cursor: crosshair;
+}
+
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
+
+    .feature {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+    }
+    .mesh {
+        fill: none;
+        stroke: lightgrey;
+        stroke-width: 2px;
+        stroke-linejoin: round;
+    }
+    h1 {
+        font-family: sans-serif;
+    }
+
+    .bar rect {
+  fill: steelblue;
+}
+
+.bar text {
+  fill: #fff;
+  font: 10px sans-serif;
+}
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        opacity: 0.8;
+        shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 11px;
+    }
+
+#bottompanel {
+      position: absolute;
+      /*top: 505px;*/
+      left: 10px;
+      background-color: white;
+      opacity: 0.9;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      z-index: 10000;
+      /*width: 1040px;*/
+      /*height: 250px;*/
+      border: 1px solid gray;
+     }
+#suggestionpanel {
+    position: absolute;
+    /*bottom: -400px;*/
+    left: 10px;
+    background-color: white;
+    /*opacity: 0.9;*/
+    border-radius: 5px;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+    /*padding-bottom: 10px;*/
+    z-index: 10000;
+    /*width: 1040px;*/
+    /*height: 250px;*/
+    border: 1px solid gray;
+}
+#rightpanel {
+    position: absolute;
+    top: 50px;
+    /*right: -210px;*/
+    background-color: white;
+    opacity: 0.9;
+    border-radius: 5px;
+    /*padding-top: 20px;*/
+    /*padding: 20px;*/
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+    /*padding-bottom: 20px;*/
+    z-index: 10000;
+    /*width: 200px;*/
+    /*height: 400px;*/
+    border: 1px solid gray;
+}
+#map_svg {
+  position: relative;
+}
+
+#panel_svg {
+  opacity: 0.85;
+}
+
+#map {
+  width: 1060px;
+  height: 700px;
+  position: absolute;
+}
+
+rect.bordered {
+    stroke: #E6E6E6;
+    stroke-width: 2px;
+}
+
+text.mono {
+    font-size: 8pt;
+    font-family: 'Bree Serif', serif;
+    fill: #aaa;
+}
+
+text.axis-workweek {
+    fill: #000;
+}
+
+text.axis-worktime {
+    fill: #000;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#review {
+    position: absolute;
+    top: 50px;
+    /*left: 200px;*/
+    background-color: white;
+    opacity: 0.9;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    z-index: 10000;
+    border: 1px solid gray;
+    overflow: scroll;
+}
+
+.review_content {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*border: 2px solid red;*/
+}

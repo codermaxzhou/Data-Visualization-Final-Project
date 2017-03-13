@@ -1,0 +1,641 @@
+[
+  {
+    "key": "Afghan",
+    "values": 0
+  },
+  {
+    "key": "Restaurants",
+    "values": 0
+  },
+  {
+    "key": "African",
+    "values": [
+    	  		{
+			    "key": "Senegalese",
+			    "value": 0
+			  },
+			  {
+			    "key": "South African",
+			    "value": 0
+			  },
+			 	{
+			    "key": "Other",
+			    "value": 0
+			  }
+			]
+  }
+,
+  {
+    "key": "American (Traditional)",
+    "values": 0
+  },
+  {
+    "key": "American (New)",
+    "values": 0
+  },
+  {
+    "key": "Arabian",
+    "values": 0
+  },
+  {
+    "key": "Argentine",
+    "values": 0
+  },
+  {
+    "key": "Armenian",
+    "values": 0
+  },
+  {
+    "key": "Asian Fusion",
+    "values": 0
+  },
+  {
+    "key": "Australian",
+    "values": 0
+  },
+  {
+    "key": "Austrian",
+    "values": 0
+  },
+  {
+    "key": "Bangladeshi",
+    "values": 0
+  },
+  {
+    "key": "Barbeque",
+    "values": 0
+  },
+  {
+    "key": "Basque",
+    "values": 0
+  },
+  {
+    "key": "Belgian",
+    "values": 0
+  },
+  {
+    "key": "Brasseries",
+    "values": 0
+  },
+  {
+    "key": "Brazilian",
+    "values": 0
+  },
+  {
+    "key": "Breakfast & Brunch",
+    "values": 0
+  },
+  {
+    "key": "British",
+    "values": 0
+  },
+  {
+    "key": "Buffets",
+    "values": 0
+  },
+  {
+    "key": "Burgers",
+    "values": 0
+  },
+  {
+    "key": "Burmese",
+    "values": 0
+  },
+
+  {
+    "key": "Cafes",
+    "values": [
+    	{
+	      "key": "Themed Cafes",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    }
+	]
+  
+  }
+  ,
+  {
+    "key": "Cafeteria",
+    "values": 0
+  },
+  {
+    "key": "Cajun/Creole",
+    "values": 0
+  },
+  {
+    "key": "Cambodian",
+    "values": 0
+  },
+  {
+    "key": "Catalan",
+    "values": 0
+  },
+  {
+    "key": "Cheesesteaks",
+    "values": 0
+  },
+
+  {
+    "key": "Caribbean",
+    "values": [
+    	{
+	      "key": "Dominican",
+	      "value": 0
+	    },
+	    {
+	      "key": "Haitian",
+	      "value": 0
+	    },
+	    {
+	      "key": "Puerto Rican",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Trinidadian",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  
+  },
+  {
+    "key": "Chicken Shop",
+    "values": 0
+  },
+  {
+    "key": "Chicken Wings",
+    "values": 0
+  },
+  {
+    "key": "Comfort Food",
+    "values": 0
+  },
+  {
+    "key": "Creperies",
+    "values": 0
+  },  
+  {
+    "key": "Chinese",
+    "values": [
+    	{
+	      "key": "Cantonese",
+	      "value": 0
+	    },
+	    {
+	      "key": "Dim Sum",
+	      "value": 0
+	    },
+	    {
+	      "key": "Hainan",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Shanghainese",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Szechuan",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  
+  },
+  {
+    "key": "Cuban",
+    "values": 0
+  },
+  {
+    "key": "Czech",
+    "values": 0
+  },
+  {
+    "key": "Diners",
+    "values": 0
+  },
+  {
+    "key": "Dinner Theater",
+    "values": 0
+  },
+  {
+    "key": "Ethiopian",
+    "values": 0
+  },
+  {
+    "key": "Fast Food",
+    "values": 0
+  },
+  {
+    "key": "Filipino",
+    "values": 0
+  },
+  {
+    "key": "Fish & Chips",
+    "values": 0
+  },
+  {
+    "key": "Fondue",
+    "values": 0
+  },
+  {
+    "key": "Food Court",
+    "values": 0
+  },
+  {
+    "key": "Food Stands",
+    "values": 0
+  },
+  {
+    "key": "French",
+    "values": [
+    	{
+	      "key": "Mauritius",
+	      "value": 0
+	    },
+	    {
+	      "key": "Reunion",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Gastropubs",
+    "values": 0
+  },
+  {
+    "key": "German",
+    "values": 0
+  },
+  {
+    "key": "Gluten-Free",
+    "values": 0
+  },
+  {
+    "key": "Greek",
+    "values": 0
+  },
+  {
+    "key": "Halal",
+    "values": 0
+  },
+  {
+    "key": "Hawaiian",
+    "values": 0
+  },
+  {
+    "key": "Himalayan/Nepalese",
+    "values": 0
+  },
+  {
+    "key": "Hong Kong Style Cafe",
+    "values": 0
+  },
+  {
+    "key": "Hot Dogs",
+    "values": 0
+  },
+  {
+    "key": "Hot Pot",
+    "values": 0
+  },
+  {
+    "key": "Hungarian",
+    "values": 0
+  },
+  {
+    "key": "Iberian",
+    "values": 0
+  },
+  {
+    "key": "Indian",
+    "values": 0
+  },
+  {
+    "key": "Indonesian",
+    "values": 0
+  },
+  {
+    "key": "Irish",
+    "values": 0
+  },
+  {
+    "key": "Italian",
+    "values": [
+    	{
+	      "key": "Calabrian",
+	      "value": 0
+	    },
+	    {
+	      "key": "Sardinian",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Tuscan",
+	      "value": 0
+	    } ,
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Japanese",
+    "values": [
+    	{
+	      "key": "Izakaya",
+	      "value": 0
+	    },
+	    {
+	      "key": "Ramen",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Teppanyaki",
+	      "value": 0
+	    } ,
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Korean",
+    "values": 0
+  },
+  {
+    "key": "Kosher",
+    "values": 0
+  },
+  {
+    "key": "Laotian",
+    "values": 0
+  },
+  {
+    "key": "Latin American",
+    "values": [
+    	{
+	      "key": "Colombian",
+	      "value": 0
+	    },
+	    {
+	      "key": "Salvadoran",
+	      "value": 0
+	    },
+	   	{
+	      "key": "Venezuelan",
+	      "value": 0
+	    } ,
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Live/Raw Food",
+    "values": 0
+  },
+  {
+    "key": "Malaysian",
+    "values": 0
+  },
+  {
+    "key": "Modern European",
+    "values": 0
+  },
+  {
+    "key": "Mediterranean",
+    "values": [
+    	{
+	      "key": "Falafel",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Mexican",
+    "values": [
+    	{
+	      "key": "Tacos",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Middle Eastern",
+    "values": [
+    	{
+	      "key": "Egyptian",
+	      "value": 0
+	    },
+	    {
+	      "key": "Lebanese",
+	      "value": 0
+	    },
+	    {
+	      "key": "Other",
+	      "value": 0
+	    } 
+	]
+  },
+  {
+    "key": "Mongolian",
+    "values": 0
+  },
+  {
+    "key": "Moroccan",
+    "values": 0
+  },
+  {
+    "key": "New Mexican Cuisine",
+    "values": 0
+  },
+  {
+    "key": "Nicaraguan",
+    "values": 0
+  },
+  {
+    "key": "Noodles",
+    "values": 0
+  },
+  {
+    "key": "Pakistani",
+    "values": 0
+  },
+  {
+    "key": "Pan Asian",
+    "values": 0
+  },
+  {
+    "key": "Persian/Iranian",
+    "values": 0
+  },
+  {
+    "key": "Peruvian",
+    "values": 0
+  },
+  {
+    "key": "Pizza",
+    "values": 0
+  },
+  {
+    "key": "Polish",
+    "values": 0
+  },
+  {
+    "key": "Pop-Up Restaurants",
+    "values": 0
+  },
+  {
+    "key": "Portuguese",
+    "values": 0
+  },
+  {
+    "key": "Poutineries",
+    "values": 0
+  },
+  {
+    "key": "Russian",
+    "values": 0
+  },
+  {
+    "key": "Salad",
+    "values": 0
+  },
+  {
+    "key": "Sandwiches",
+    "values": 0
+  },
+  {
+    "key": "Scandinavian",
+    "values": 0
+  },
+  {
+    "key": "Scottish",
+    "values": 0
+  },
+  {
+    "key": "Seafood",
+    "values": 0
+  },
+  {
+    "key": "Singaporean",
+    "values": 0
+  },
+  {
+    "key": "Slovakian",
+    "values": 0
+  },
+  {
+    "key": "Soul Food",
+    "values": 0
+  },
+  {
+    "key": "Soup",
+    "values": 0
+  },
+  {
+    "key": "Southern",
+    "values": 0
+  },
+  {
+    "key": "Spanish",
+    "values": 0
+  },
+  {
+    "key": "Sri Lankan",
+    "values": 0
+  },
+  {
+    "key": "Steakhouses",
+    "values": 0
+  },
+  {
+    "key": "Supper Clubs",
+    "values": 0
+  },
+  {
+    "key": "Sushi Bars",
+    "values": 0
+  },
+  {
+    "key": "Syrian",
+    "values": 0
+  },
+  {
+    "key": "Taiwanese",
+    "values": 0
+  },
+  {
+    "key": "Tapas Bars",
+    "values": 0
+  },
+  {
+    "key": "Tapas/Small Plates",
+    "values": 0
+  },
+  {
+    "key": "Tex-Mex",
+    "values": 0
+  },
+  {
+    "key": "Thai",
+    "values": 0
+  },
+  {
+    "key": "Turkish",
+    "values": 0
+  },
+  {
+    "key": "Ukrainian",
+    "values": 0
+  },
+  {
+    "key": "Uzbek",
+    "values": 0
+  },
+  {
+    "key": "Vegan",
+    "values": 0
+  },
+  {
+    "key": "Vegetarian",
+    "values": 0
+  },
+  {
+    "key": "Vietnamese",
+    "values": 0
+  },
+  {
+    "key": "Waffles",
+    "values": 0
+  },
+  {
+    "key": "Wraps",
+    "values": 0
+  }
+]
+

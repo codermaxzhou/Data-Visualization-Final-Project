@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="This is course project for WPI data visualization.">
+    <meta name="author" content="Yihao Zhou">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Yelp Data Visualization</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this template -->
+    <link href="dist/css/starter-template.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- D3.js library -->
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+    <!-- js charts for visualization -->
+    <script src="dist/js/symbol_map.js"></script>
+    <script src="dist/js/histogram.js"></script>
+    <script src="dist/js/stacked.js"></script>
+    <script src="dist/js/heatmap.js"></script>
+    <script src="dist/js/treemap.js"></script>
+    <script src="dist/js/business_info.js"></script>
+    <script src="dist/js/suggestion.js"></script>
+    <script src="dist/js/viewport.js"></script>
+
+    <!-- js library for map -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+
+
+    <link href='dist/css/project_style.css' rel='stylesheet'/>
+    <link href='l.geosearch.css' rel='stylesheet'/>
+    <script src="l.control.geosearch.js"></script>
+    <script src="l.geosearch.provider.esri.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Bree+Serif">
+
+    <style type="text/css">
+        @import url(//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css);
+    </style>
+
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Yelp Business Data Visualization</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!--<div class="container">-->
+
+<!--<div class="starter-template">-->
+<!--<h1>Bootstrap starter template</h1>-->
+<!--<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>-->
+<!--</div>-->
+
+<div id="home" class="container-fluid">
+    <div id="map"></div>
+    <div id="suggestionpanel"></div>
+    <div id="bottompanel"></div>
+    <div id="rightpanel"></div>
+    <div id="review"></div>
+</div>
+
+
+<!--</div>&lt;!&ndash; /.container &ndash;&gt;-->
+
+<!-- D3 Visualization Javascript -->
+
+<script type="text/javascript">
+
+    var Vis = {};
+    Vis.data = new Array();
+    Vis.tree = [];
+    var json_file = "data/business_real_final.json";
+
+
+    width_map = window.innerWidth;
+    height_map = window.innerHeight - 55;
+    width_histogram = 250 / 1060 * width_map;
+    height_tree = 200 / 700 * height_map;
+    height_histogram = 130 / 700 * height_map;
+    between_width = 120 / 1060 * width_map;
+    width_tree = 600 / 1060 * width_map;
+    right_panel_width = 200 / 1060 * width_map;
+    //    right_panel_height = 400 / 700 * height_map + 400 / 700 * 20;
+    right_panel_height = height_map - height_tree;
+    right_panel_padding = 20;
+    review_panel_width = 300 / 1060 * width_map;
+    review_panel_height = height_map - height_tree;
+
+
+    var title_font_size = "20px";
+    var title_font_family = "Bree Serif";
+
+    d3.select("#bottompanel")
+        .style("width", +width_histogram + width_tree + between_width + 90 + "px")
+        .style("height", +height_tree + "px")
+        .style("top", +height_map + 50 - height_tree + "px");
+
+    d3.select("#suggestionpanel")
+        .style("width", + width_tree  + 90 + "px")
+        .style("height", +height_tree*2/5 + "px")
+        .style("bottom",  height_tree/2 + "px")
+        .style("opacity",0);
+
+    d3.select("#map")
+        .style("width", +(width_map) + "px")
+        .style("height", +(height_map-210) + "px")
+        .style("left", "0px");
+
+    d3.select("#rightpanel")
+        .style("width", +right_panel_width + "px")
+        .style("height", +right_panel_height + "px")
+        .style("padding", +right_panel_padding + "px")
+        .style("right", -right_panel_width + 10 + "px");
+
+    d3.select("#review")
+        .style("width", +review_panel_width + "px")
+        .style("height", +review_panel_height + "px")
+        .style("right", -review_panel_width + "px");
+
+    var busgroup = d3.select("#rightpanel").append("div").attr("id", "business_info")
+        .attr("position", "relative")
+        .style("width", "auto")
+        .style("height", "auto");
+
+    var svg_reivew = d3.select("#bottompanel").append("svg").attr("class", "panel_svg")
+        .attr("width", width_histogram + width_tree + between_width)
+        .attr("height", height_tree);
+
+    var svg_right = d3.select("#rightpanel").append("svg").attr("class", "panel_svg")
+        .attr("width", +right_panel_width - right_panel_padding * 2 + "px")
+        .attr("height", +(right_panel_height - right_panel_padding * 2) * 2 / 3 + "px")
+        .attr("position", "relative");
+
+    var svg_suggestion = d3.select("#suggestionpanel").append("svg").attr("class", "svg_suggestion")
+        .attr("width", width_tree  + 90)
+        .attr("height", height_tree/2);
+
+
+    var color = d3.scaleOrdinal()
+        .domain(["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"])
+        .range(["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"]);
+
+
+    var map = new L.Map("map", {center: [45.52, -73.6], zoom: 12})
+        .addLayer(new L.TileLayer('http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png')
+        );
+
+    map._initPathRoot()
+
+    var svg = d3.select("#map").select("svg").attr("class", "map_svg")
+    //.attr("width", width_map)
+    //.attr("height", height_map),
+    g = svg.append("g");
+
+    suggestion_group = svg_suggestion.append("g");
+
+    var sgroup = svg_reivew.append("g")
+        .attr("transform", "translate(" + (width_tree + between_width) + "," + (height_tree - height_histogram - 20) + ")")
+
+    var histogram = d3.chart.histogram()
+    var sg = svg_reivew.append("g")
+        .attr("transform", "translate(" + 0 + ", 5)")
+    var treemap = d3.chart.treemap()
+    var symbol_map = d3.chart.symbol_map()
+
+
+
+    var businessinfo = d3.chart.businessinfo();
+    var suggestion = d3.chart.suggestion();
+
+
+    d3.queue()
+        .defer(d3.json, "data/treemap_pre_date.json")
+        .defer(d3.json, json_file)
+        .await(ready);
+
+    function ready(error, treemap_pre_data, business_with_checkin) {
+        if (error) throw error;
+
+
+//        console.log(11111,business_with_checkin);
+        business_with_checkin.forEach(function (d) {
+            d.LatLng = new L.LatLng(d.latitude,
+                d.longitude)
+        })
+
+        business_with_checkin.forEach(function (d) {
+            d.price = d["attributes"]["Price Range"];
+//            d.price = Math.round(d3.randomUniform(1, 4)());
+
+        })
+
+//        console.log("after",JSON.stringify(business_with_checkin[0]));
+        Vis.data = business_with_checkin;
+
+        Vis.tree = treemap_pre_data;
+
+
+        createDiagram();
+    }
+
+
+    function createDiagram() {
+
+        map.on('moveend', function () {
+            var data = [];
+            // console.log(map.getBounds().getSouth());
+            // console.log(map.getBounds().getNorth());
+            // console.log(map.getBounds().getEast());
+            // console.log(map.getBounds().getWest());
+            // console.log(Vis.data[0]);
+
+            for (i in Vis.data) {
+
+                if (Vis.data[i].latitude > map.getBounds().getSouth() && Vis.data[i].latitude < map.getBounds().getNorth() &&
+                    Vis.data[i].longitude < map.getBounds().getEast() && Vis.data[i].longitude > map.getBounds().getWest()) {
+                    data.push(Vis.data[i]);
+                }
+            }
+
+            if(data.length != 0){ update_Views(data);}else{
+//                update_Views([]);
+                update_text("Total: " + data.length);
+                d3.selectAll(".node").remove();
+                d3.selectAll(".node_label").remove();
+               histogram.data(data);
+               histogram.update();
+               d3.selectAll(".histogram").remove();
+
+            }
+            //console.log(data);
+
+        });
+
+
+        coordinateViews(Vis.data);
+
+    }
+
+    function coordinateViews(data) {
+
+
+        histogram.width(width_histogram)
+        histogram.height(height_histogram)
+//    console.log(Vis.data)
+        histogram.data(data)
+        histogram(sgroup)
+
+        //var treemap= d3.chart.treemap()
+        treemap.width(width_tree)
+        treemap.height(height_tree)
+//        console.log(11111,data);
+        treemap.data(data, Vis.tree)
+        treemap(sg)
+
+
+        symbol_map.width(width_map)
+        symbol_map.height(height_map)
+        symbol_map.data(data)
+        symbol_map(g, map)
+
+        create_text("Total: " + data.length);
+
+
+        // Create Heatmap
+        var hmgroup = svg_right.append("g").attr("id", "heatmap");
+//            .attr("transform", "translate( " + (right_panel_width / 2 - right_panel_padding - 100) + " , " + 0 + " )");
+        var heatmap = d3.chart.heatmap();
+        heatmap.data([]);
+        heatmap(hmgroup);
+
+        suggestion(suggestion_group);
+        // Create Business name
+        businessinfo(busgroup);
+
+
+        histogram.on("hover", function (hovered) {
+            //console.log(hovered);
+            var v = [];
+            if (hovered.length !== 0) {
+                data.forEach(function (d) {
+                    if (hovered[0].indexOf(d.review_count) !== -1) {
+                        v.push(d);
+                    }
+                })
+                symbol_map.data(v)
+                symbol_map.update();
+                //symbol_map.highlight(v);
+                //console.log(v);
+//                treemap.data(v, Vis.tree)
+//                treemap.update()
+            }
+            //console.log(v);
+            //symbol_map.highlight(v);
+            else {
+//                symbol_map.data(data)
+//                symbol_map.update();
+//                treemap.data(Vis.data, Vis.tree)
+//                treemap.update()
+            }
+
+
+        })
+
+        histogram.on("click", function (clicked) {
+            //console.log(clicked[0].x0);
+            var v = [];
+            data.forEach(function (d) {
+                // if (clicked[0].indexOf(d.review_count) !== -1) {
+                //     v.push(d);
+                // }
+                if(d.review_count>=clicked[0].x0){
+                    v.push(d);
+                }
+            });
+            symbol_map.data(v)
+            symbol_map.update();
+
+        })
+
+        symbol_map.on("hover", function (hovered) {
+            histogram.highlight(hovered)
+            treemap.highlight(hovered)
+
+//            console.log(hovered)
+//            d3.select("#rightpanel").transition().duration(200)
+//                .style("right", -right_panel_width + 10 + "px");
+
+            if (hovered.length !== 0) {
+
+
+                //Update checkin heatmap
+                svg_right.select("#heatmap").remove();
+                hmgroup = svg_right.append("g").attr("id", "heatmap");
+
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", +0 + "px");
+
+                heatmap = d3.chart.heatmap();
+                heatmap.data(hovered[0]["checkin_info"]);
+                heatmap(hmgroup);
+
+                //Update business info
+                businessinfo.data(hovered[0]);
+                businessinfo.update();
+
+
+            }else{
+//                console.log("clicked or not",d3.select(".isOnClick").length);
+
+                if(d3.select(".isOnClick").data().length ==0){
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", -right_panel_width + 10 + "px");}
+
+                var c=d3.select(".isOnClick");
+                businessinfo.data(c.data()[0]);
+                businessinfo.update();
+            }
+
+            });
+
+            symbol_map.on("click", function (clicked) {
+//                console.log(clicked);
+                if (clicked.length !== 0) {
+                    d3.select("#rightpanel").transition().duration(200)
+                        .style("right", +0 + "px");
+                }
+                else {
+                    d3.select("#rightpanel").transition().duration(200)
+                        .style("right", -right_panel_width + 10 + "px");
+
+                    d3.select("#review").transition().duration(200)
+                        .style("right", -review_panel_width + "px");
+                }
+
+
+
+
+        });
+        symbol_map.on("reset", function (data) {
+            // console.log(data);
+            treemap.data(data, Vis.tree)
+            treemap.update()
+        })
+
+        treemap.on("click",function (clicked) {
+//            console.log(clicked);
+            var v = [];
+            var data_2 = [];
+            if (clicked.length !== 0) {
+
+
+                d3.select("#suggestionpanel")
+                    .style("top", +height_map + 50 - height_tree - height_tree*2/5 + "px").style("opacity",0.9);
+
+                suggestion.data(data);
+                suggestion.update();
+
+                update_text(clicked[0] + " : " + clicked[1].value);
+
+//                console.log("key",hovered[1].key);
+                if (clicked[1].key == "1") {
+                    data.forEach(function (d) {
+                        for (i in d.categories) {
+                            if (d.categories[i] == clicked[0]) {
+//                                console.log(treemap.starlevel())
+                                if (d.stars >= treemap.starlevel()) {
+                                    v.push(d);
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    data.forEach(function (d) {
+                        for (i in d.categories) {
+                            if (d.categories[i] == clicked[0]) {
+//                                console.log(treemap.starlevel())
+                                if (d.stars < treemap.starlevel()) {
+
+                                    v.push(d);
+                                }
+                            }
+                        }
+                    })
+                }
+                symbol_map.data(v)
+                symbol_map.update();
+                //symbol_map.highlight(v);
+                histogram.data(v)
+                histogram.update()
+                v = [];
+            }
+            //console.log(v);
+            //symbol_map.highlight(v);
+            else {
+                d3.select("#suggestionpanel")
+                    .style("top", - height_map + 50  + "px");
+
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", -right_panel_width + 10 + "px");
+
+                d3.select("#review").transition().duration(200)
+                    .style("right", -review_panel_width + "px");
+
+                update_text("Total: " + data.length);
+//                data.forEach(function (d) {
+//                    if (d.stars >= treemap.starlevel()) {
+//                        data_2.push(d);
+//                    }
+//                });
+
+                treemap.starlevel()
+                symbol_map.data(data)
+                symbol_map.update();
+                histogram.data(data)
+                histogram.update()
+
+                update_text("Total: " + histogram.get_data_length());
+            }
+        })
+    }
+
+    function update_Views(data) {
+
+        //needs to coordinate with the tree and slider and price and map ??
+
+        //console.log("total",data)
+            histogram.data(data)
+            histogram.update();
+
+           // console.log("total",data)
+            //already coordinate with the map slider and price,   histogram????
+            treemap.data(data, Vis.tree)
+            treemap.update()
+
+            //already coordinate with the price, slider(in treemap.js), treemap,  histogram???
+            symbol_map.data(data)
+            symbol_map.update()
+
+            //console.log("total",data.length)
+
+
+
+
+        update_text("Total: " + data.length); //??? needs to coordinate with others or not?
+
+        // needs coordinate with price slider and map here
+        histogram.on("hover", function (hovered) {
+            //console.log(hovered);
+            var v = [];
+            if (hovered.length !== 0) {
+                data.forEach(function (d) {
+                    if (hovered[0].indexOf(d.review_count) !== -1) {
+                        v.push(d);
+                    }
+                })
+                symbol_map.data(v)
+                symbol_map.update();
+                //symbol_map.highlight(v);
+                //console.log(v);
+//                treemap.data(v, Vis.tree)
+//                treemap.update()
+            }
+            //console.log(v);
+            //symbol_map.highlight(v);
+            else {
+//                symbol_map.data(data)
+//                symbol_map.update();
+//                treemap.data(Vis.data, Vis.tree)
+//                treemap.update()
+            }
+        })
+        histogram.on("click", function (clicked) {
+            //console.log(clicked);
+            var v = [];
+            data.forEach(function (d) {
+                // if (clicked[0].indexOf(d.review_count) !== -1) {
+                //     v.push(d);
+                // }
+                if(d.review_count>=clicked[0].x0){
+                    v.push(d);
+                }
+            });
+            symbol_map.data(v)
+            symbol_map.update();
+        })
+
+        symbol_map.on("hover", function (hovered) {
+//            console.log(hovered);
+            histogram.highlight(hovered)
+            treemap.highlight(hovered)
+
+
+
+            if (hovered.length !== 0) {
+
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", +0 + "px");
+                //Update checkin heatmap
+                svg_right.select("#heatmap").remove();
+                hmgroup = svg_right.append("g").attr("id", "heatmap");
+                heatmap = d3.chart.heatmap();
+                heatmap.data(hovered[0]["checkin_info"]);
+                heatmap(hmgroup);
+
+
+                //Update business info
+                businessinfo.data(hovered[0]);
+                businessinfo.update();
+
+            }else{
+
+
+                if(d3.select(".isOnClick").data().length ==0){
+                    d3.select("#rightpanel").transition().duration(200)
+                        .style("right", -right_panel_width + 10 + "px");}
+
+                var c=d3.select(".isOnClick");
+                businessinfo.data(c.data()[0]);
+                businessinfo.update();
+            }
+        })
+
+        symbol_map.on("click", function (clicked) {
+//            console.log(clicked);
+            if (clicked.length !== 0) {
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", +0 + "px");
+            }
+            else {
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", -right_panel_width + 10 + "px");
+
+                d3.select("#review").transition().duration(200)
+                    .style("right", -review_panel_width + "px");
+
+            }
+
+        });
+
+        // whats this mean?
+        symbol_map.on("reset", function (data) {
+
+            treemap.data(data, Vis.tree)
+            treemap.update()
+        })
+
+        treemap.on("click",function (clicked) {
+            var v = [];
+            var data_2 = [];
+            if (clicked.length !== 0) {
+
+                suggestion.data(data);
+                suggestion.update();
+
+
+                d3.select("#suggestionpanel")
+                    .style("top", +height_map + 50 - height_tree - height_tree*2/5 + "px").style("opacity",0.9);
+                update_text(clicked[0] + " : " + clicked[1].value);
+                if (clicked[1].key == "1") {
+                    data.forEach(function (d) {
+                        for (i in d.categories) {
+                            if (d.categories[i] == clicked[0]) {
+
+                                if (d.stars >= treemap.starlevel()) {
+                                    v.push(d);
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    data.forEach(function (d) {
+                        for (i in d.categories) {
+                            if (d.categories[i] == cliked[0]) {
+//                                console.log(treemap.starlevel())
+                                if (d.stars < treemap.starlevel()) {
+
+                                    v.push(d);
+                                }
+                            }
+                        }
+                    })
+                }
+                symbol_map.data(v)
+                symbol_map.update();
+                histogram.data(v)
+                //console.log(v);
+                histogram.update()
+                v = [];
+            }
+            //console.log(v);
+            //symbol_map.highlight(v);
+            else {
+                d3.select("#rightpanel").transition().duration(200)
+                    .style("right", -right_panel_width + 10 + "px");
+
+                d3.select("#review").transition().duration(200)
+                    .style("right", -review_panel_width + "px");
+                d3.select("#suggestionpanel")
+                    .style("top", - height_map + 50 + "px");
+                update_text("Total: " + data.length);
+
+//                data.forEach(function (d) {
+//                    if (d.stars >= treemap.starlevel()) {
+//                        data_2.push(d);
+//                    }
+//                });
+
+                symbol_map.data(data)
+                symbol_map.update();
+                histogram.data(data)
+                histogram.update()
+            }
+        })
+
+    }
+
+    function create_text(d) {
+        svg_reivew
+            .append("g")
+            .attr("class", "text_panel")
+            .attr("transform", "translate(" + (width_tree + between_width + 50) + "," + 40 + ")")
+            .append("text")
+            .style("font-size", "20px")
+            .style('fill', 'grey')
+            .text(d)
+    }
+
+    function update_text(d) {
+        //console.log(d);
+        if (d == "null") return;
+
+
+
+        var t = svg_reivew.select(".text_panel").remove();
+
+        
+        //console.log(t);
+        svg_reivew
+            .append("g")
+            .attr("class", "text_panel")
+            .attr("transform", "translate(" + (width_tree + between_width + 30) + "," + 40 + ")")
+            .append("text")
+            .style("font-size", "20px")
+            .style('fill', 'grey')
+            .text(d)
+
+    }
+
+</script>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

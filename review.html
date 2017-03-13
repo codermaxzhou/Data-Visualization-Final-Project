@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+</head>
+
+<style type="text/css">
+
+    #panel {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: white;
+        opacity: 0.9;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        z-index: 10000;
+        width: 1040px;
+        height: 250px;
+        border: 1px solid gray;
+        overflow: scroll;
+    }
+
+    #review {
+        position: absolute;
+        top: 280px;
+        left: 200px;
+        background-color: white;
+        opacity: 0.9;
+        border-radius: 5px;
+        /*padding-left: 10px;*/
+        /*padding-right: 10px;*/
+        padding-bottom: 10px;
+        z-index: 10000;
+        width: 400px;
+        height: 250px;
+        border: 1px solid gray;
+        overflow: scroll;
+    }
+
+    .review_content {
+        position: relative;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        /*border: 2px solid red;*/
+    }
+
+
+</style>
+<body>
+<div id="panel"></div>
+<div id="review"></div>
+
+<script>
+    width = 900;
+    height = 250;
+    padding = 30;
+    var border = 1;
+    var bordercolor = 'black';
+    var mydata;
+
+
+    review_svg = d3.select("#panel").append("svg").attr("width", width).attr("height", height).attr("id", "review_svg");
+
+    d3.json("data/one_restaurant_data.json", function (data) {
+//        console.log(data);
+            mydata = data[0];
+            review();
+        }
+    );
+
+    function review() {
+
+        s1 = mydata.rating_count["1"] != undefined ? mydata.rating_count["1"] : 0;
+        s2 = mydata.rating_count["2"] != undefined ? mydata.rating_count["2"] : 0;
+        s3 = mydata.rating_count["3"] != undefined ? mydata.rating_count["3"] : 0;
+        s4 = mydata.rating_count["4"] != undefined ? mydata.rating_count["4"] : 0;
+        s5 = mydata.rating_count["5"] != undefined ? mydata.rating_count["5"] : 0;
+        r1 = mydata.reviews["1"] != undefined ? mydata.reviews["1"] : [];
+        r2 = mydata.reviews["2"] != undefined ? mydata.reviews["2"] : [];
+        r3 = mydata.reviews["3"] != undefined ? mydata.reviews["3"] : [];
+        r4 = mydata.reviews["4"] != undefined ? mydata.reviews["4"] : [];
+        r5 = mydata.reviews["5"] != undefined ? mydata.reviews["5"] : [];
+
+//        console.log([s1,s2,s3,s4,s5])
+//        console.log([r1,r2,r3,r4,r5])
+        star = [{"rate": s1, "content": r1}, {"rate": s2, "content": r2}, {"rate": s3, "content": r3}, {
+            "rate": s4,
+            "content": r4
+        }, {"rate": s5, "content": r5}];
+        stars = [1, 1, 1, 1, 1];
+        stars_lable = ["1 star", "2 star", "3 star", "4 tar", "5 star"];
+
+//        console.log(star);
+
+        x = d3.scaleLinear()
+            .domain([0, mydata.review_count]).range([0, width / 8]);
+
+        y = d3.scaleBand()
+            .domain(star.map(function (d, i) {
+                return i;
+            }))
+            .range([2 * padding, 5 * padding], .1);
+
+//        console.log(y.bandwidth());
+
+        review_svg
+            .append("line").attr("transform", "translate( " + 200 + " , " + 100 + " )")
+            .attr("x1", padding)
+            .attr("y1", 0)
+            .attr("x2", padding)
+            .attr("y2", y.bandwidth() * 5)
+            .style("stroke", "black")
+            .style("stoke-width", 1);
+
+
+        backgroud = review_svg.append("g")
+            .attr("transform", "translate( " + 200 + " , " + 100 + " )");
+
+        backgroud.selectAll(".lable").data(stars_lable).enter()
+            .append("text").attr("class", "lable")
+            .text(function (d) {
+                return d;
+            })
+            .attr("x", padding / 7)
+            .attr("y", function (d, i) {
+                return i * y.bandwidth() + y.bandwidth() / 2 + 3;
+            })
+            .style("text-anchor", "middle")
+            .style("stroke-width", 0.5)
+            .style("stroke", "blue");
+
+        backgroud.selectAll(".rect_backgroud")
+            .data(stars)
+            .enter()
+            .append("rect")
+            .attr("class", "rect_backgroud")
+            .attr("x", padding)
+            .attr("y", function (d, i) {
+                return i * y.bandwidth();
+            })
+            .attr("width", x(mydata.review_count))
+            .attr("height", y.bandwidth() - 2)
+            .style("fill", "grey")
+            .style("opacity", 0.1)
+            .style("stroke", bordercolor)
+            .style("stroke-width", border)
+            .style("stroke-style", "inset");
+
+
+        r_bar = review_svg.append("g")
+            .attr("transform", "translate( " + 200 + " , " + 100 + " )");
+
+        r_bar = r_bar.selectAll("rect").data(star);
+
+        r_bar.transition().duration(200)
+            .attr("width", function (d) {
+                return x(d.rate);
+            })
+            .on("click", showreview);
+
+
+        r_bar.enter().append("rect")
+            .attr("class", "review_bar")
+            .attr("x", padding)
+            .attr("y", function (d, i) {
+                return i * y.bandwidth();
+            })
+            .attr("width", function (d) {
+                return x(d.rate);
+            })
+            .attr("height", y.bandwidth() - 2)
+            .style("fill", "gold")
+            .style("stroke", bordercolor)
+            .style("stroke-width", 1)
+            .style("stroke-style", "outset")
+            .on("click", showreview);
+
+        r_bar.exit().remove();
+
+
+        p = d3.format(",.2%");
+
+        r_bar.enter().append("text")
+            .attr("class", "review_bar_text")
+            .attr("x", x(mydata.review_count) + 35)
+            .attr("y", function (d, i) {
+                return i * y.bandwidth() + y.bandwidth() / 2 + 3;
+            })
+            .text(function (d) {
+                return p(d.rate / mydata.review_count);
+            })
+            .style("text-anchor", "start")
+            .style("font-size", "14px")
+            .style("stroke-width", 0.5)
+            .style("stroke", "blue");
+
+
+        function showreview(d) {
+            console.log(d)
+            d3.selectAll(".review_bar").style("fill", "gold");
+
+            d3.select(this).style("fill", "brown");
+            d3.selectAll(".review_content").remove();
+
+            var count = 0;
+
+            d.content.forEach(function (element) {
+//                d3.select("#review").append("div")
+//                    .attr("class", "review_content")
+//                    .text(element);
+                if (count%2 == 0){
+                    d3.select("#review").append("div")
+                        .attr("class", "review_content")
+                        .style("background-color", "#204d74")
+                        .style("color", "white")
+                        .text(element)
+                    ;
+                }
+                else {
+                    d3.select("#review").append("div")
+                        .attr("class", "review_content")
+                        .style("background-color", "white")
+                        .text(element);
+                }
+                count++;
+            });
+        }
+    }
+
+
+</script>
+
+</body>
+</html>
