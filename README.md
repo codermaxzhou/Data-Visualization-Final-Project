@@ -1,7 +1,7 @@
 Final Project - Yelp Dataset Visualization  
 ===
 
-[Project Link]( https://iihaw.github.io/Data-Visualization-Final-Project/)
+[Project Link]( https://yihaozhou.github.io/Data-Visualization-Final-Project/)
 
 ###team
 Hongzhang Cheng (hcheng3)
